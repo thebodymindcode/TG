@@ -16,20 +16,15 @@
       --cyan-light: #22d3ee;
       --pink: #ec4899;
       --green: #10b981;
+      --orange: #f97316;
       --text: #ffffff;
       --text-muted: #9ca3af;
       --gradient: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 50%, var(--pink) 100%);
       --gradient-btn: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
       --glow-purple: 0 0 60px rgba(168, 85, 247, 0.4);
-      --glow-cyan: 0 0 60px rgba(6, 182, 212, 0.3);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     body {
@@ -40,13 +35,10 @@
       overflow-x: hidden;
     }
 
-    /* Анимированный фон */
     .bg-animation {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       z-index: -1;
       overflow: hidden;
     }
@@ -59,33 +51,9 @@
       animation: float 20s infinite ease-in-out;
     }
 
-    .orb-1 {
-      width: 600px;
-      height: 600px;
-      background: var(--purple);
-      top: -200px;
-      right: -200px;
-      animation-delay: 0s;
-    }
-
-    .orb-2 {
-      width: 500px;
-      height: 500px;
-      background: var(--cyan);
-      bottom: -150px;
-      left: -150px;
-      animation-delay: -7s;
-    }
-
-    .orb-3 {
-      width: 400px;
-      height: 400px;
-      background: var(--pink);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation-delay: -14s;
-    }
+    .orb-1 { width: 600px; height: 600px; background: var(--purple); top: -200px; right: -200px; }
+    .orb-2 { width: 500px; height: 500px; background: var(--cyan); bottom: -150px; left: -150px; animation-delay: -7s; }
+    .orb-3 { width: 400px; height: 400px; background: var(--pink); top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -14s; }
 
     @keyframes float {
       0%, 100% { transform: translate(0, 0) scale(1); }
@@ -94,13 +62,10 @@
       75% { transform: translate(-50px, -30px) scale(1.05); }
     }
 
-    /* Сетка */
     .grid-bg {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       z-index: -1;
       background-image: 
         linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px),
@@ -118,9 +83,7 @@
     /* Хедер */
     .header {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       padding: 16px 24px;
       background: rgba(10, 10, 15, 0.8);
@@ -142,10 +105,6 @@
       gap: 8px;
       font-size: 14px;
       font-weight: 700;
-    }
-
-    .logo-icon {
-      font-size: 18px;
     }
 
     .logo-text {
@@ -180,7 +139,6 @@
       justify-content: center;
       padding: 120px 0 80px;
       text-align: center;
-      position: relative;
     }
 
     .hero-badge {
@@ -188,12 +146,12 @@
       align-items: center;
       gap: 8px;
       padding: 10px 20px;
-      background: rgba(168, 85, 247, 0.1);
-      border: 1px solid rgba(168, 85, 247, 0.3);
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
       border-radius: 50px;
       font-size: 12px;
       font-weight: 600;
-      color: var(--purple);
+      color: #6ee7b7;
       margin-bottom: 32px;
       animation: fadeInUp 0.8s ease;
     }
@@ -207,13 +165,13 @@
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-      50% { opacity: 0.8; box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
     }
 
     .hero h1 {
       font-size: clamp(32px, 8vw, 56px);
-      font-weight: 800;
+      font-weight: 900;
       line-height: 1.1;
       margin-bottom: 24px;
       animation: fadeInUp 0.8s ease 0.1s both;
@@ -228,7 +186,7 @@
     }
 
     .hero-text {
-      font-size: 16px;
+      font-size: 17px;
       color: var(--text-muted);
       margin-bottom: 40px;
       max-width: 500px;
@@ -261,16 +219,15 @@
     .cta-btn::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: 0.5s;
+      animation: shimmer 2s infinite;
     }
 
-    .cta-btn:hover::before {
-      left: 100%;
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
     }
 
     .cta-btn:hover {
@@ -278,17 +235,14 @@
       box-shadow: 0 20px 60px rgba(168, 85, 247, 0.5);
     }
 
-    .cta-btn svg {
-      width: 24px;
-      height: 24px;
-    }
+    .cta-btn svg { width: 24px; height: 24px; }
 
     /* Статистика */
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      margin-top: 60px;
+      margin-top: 50px;
       animation: fadeInUp 0.8s ease 0.4s both;
     }
 
@@ -329,9 +283,7 @@
     }
 
     /* Секции */
-    .section {
-      padding: 80px 0;
-    }
+    .section { padding: 80px 0; }
 
     .section-label {
       font-size: 11px;
@@ -350,14 +302,24 @@
       font-size: clamp(24px, 5vw, 32px);
       font-weight: 800;
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 20px;
       line-height: 1.2;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* Карточки проблем */
     .problem-card {
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.02));
-      border: 1px solid rgba(239, 68, 68, 0.2);
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(249, 115, 22, 0.02));
+      border: 1px solid rgba(249, 115, 22, 0.2);
       border-radius: 24px;
       padding: 28px 24px;
       margin-bottom: 16px;
@@ -366,7 +328,7 @@
 
     .problem-card:hover {
       transform: translateX(8px);
-      border-color: rgba(239, 68, 68, 0.4);
+      border-color: rgba(249, 115, 22, 0.5);
     }
 
     .problem-header {
@@ -379,7 +341,7 @@
     .problem-icon {
       width: 48px;
       height: 48px;
-      background: rgba(239, 68, 68, 0.15);
+      background: rgba(249, 115, 22, 0.15);
       border-radius: 14px;
       display: flex;
       align-items: center;
@@ -388,9 +350,9 @@
     }
 
     .problem-card h3 {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 700;
-      color: #fca5a5;
+      color: #fdba74;
     }
 
     .problem-card p {
@@ -428,24 +390,21 @@
 
     .brain-rings {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 150px;
-      height: 150px;
+      width: 150px; height: 150px;
     }
 
     .ring {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       border: 2px solid rgba(168, 85, 247, 0.2);
       border-radius: 50%;
       animation: ringPulse 3s infinite ease-out;
     }
 
-    .ring-1 { width: 100px; height: 100px; animation-delay: 0s; }
+    .ring-1 { width: 100px; height: 100px; }
     .ring-2 { width: 130px; height: 130px; animation-delay: 0.5s; }
     .ring-3 { width: 160px; height: 160px; animation-delay: 1s; }
 
@@ -461,10 +420,7 @@
       margin-top: 16px;
     }
 
-    .info-grid {
-      display: grid;
-      gap: 16px;
-    }
+    .info-grid { display: grid; gap: 16px; }
 
     .info-card {
       display: flex;
@@ -498,13 +454,9 @@
     }
 
     /* Прогресс бары */
-    .progress-grid {
-      margin-top: 32px;
-    }
+    .progress-grid { margin-top: 32px; }
 
-    .progress-item {
-      margin-bottom: 20px;
-    }
+    .progress-item { margin-bottom: 20px; }
 
     .progress-header {
       display: flex;
@@ -512,10 +464,7 @@
       margin-bottom: 8px;
     }
 
-    .progress-label {
-      font-size: 13px;
-      font-weight: 600;
-    }
+    .progress-label { font-size: 13px; font-weight: 600; }
 
     .progress-value {
       font-size: 13px;
@@ -538,23 +487,14 @@
       background: var(--gradient);
       border-radius: 10px;
       position: relative;
-      overflow: hidden;
     }
 
     .progress-fill::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
       animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
     }
 
     /* Карточки решений */
@@ -599,6 +539,15 @@
       line-height: 1.7;
     }
 
+    .solution-card .result {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(16, 185, 129, 0.2);
+      font-size: 13px;
+      color: var(--green);
+      font-weight: 600;
+    }
+
     /* Таймлайн */
     .timeline {
       position: relative;
@@ -609,8 +558,7 @@
       content: '';
       position: absolute;
       left: 15px;
-      top: 0;
-      bottom: 0;
+      top: 0; bottom: 0;
       width: 3px;
       background: var(--gradient);
       border-radius: 10px;
@@ -681,8 +629,12 @@
       font-size: 15px;
       line-height: 1.8;
       margin-bottom: 20px;
-      font-style: italic;
       color: rgba(255,255,255,0.9);
+    }
+
+    .review-highlight {
+      color: var(--green);
+      font-weight: 600;
     }
 
     .review-author {
@@ -703,24 +655,40 @@
       font-size: 16px;
     }
 
-    .review-name {
-      font-size: 15px;
-      font-weight: 700;
+    .review-name { font-size: 15px; font-weight: 700; }
+    .review-role { font-size: 12px; color: var(--text-muted); }
+
+    /* Мотивация */
+    .motivation-block {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.1));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 24px;
+      padding: 32px 24px;
+      text-align: center;
+      margin: 48px 0;
     }
 
-    .review-role {
-      font-size: 12px;
-      color: var(--text-muted);
+    .motivation-icon { font-size: 48px; margin-bottom: 16px; }
+
+    .motivation-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #6ee7b7;
+      margin-bottom: 12px;
+    }
+
+    .motivation-text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
     }
 
     /* Финальный CTA */
-    .final-cta {
-      padding: 80px 0;
-    }
+    .final-cta { padding: 80px 0; }
 
     .cta-box {
       background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.1));
-      border: 1px solid rgba(168, 85, 247, 0.3);
+      border: 2px solid rgba(168, 85, 247, 0.4);
       border-radius: 32px;
       padding: 48px 28px;
       text-align: center;
@@ -731,10 +699,8 @@
     .cta-box::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
       background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.1) 0%, transparent 60%);
       animation: rotate 20s linear infinite;
     }
@@ -760,8 +726,8 @@
 
     .cta-box h2 {
       font-size: clamp(22px, 5vw, 28px);
-      font-weight: 800;
-      margin-bottom: 12px;
+      font-weight: 900;
+      margin-bottom: 16px;
       line-height: 1.3;
     }
 
@@ -832,7 +798,6 @@
       line-height: 1.7;
     }
 
-    /* Анимации появления */
     .fade-in {
       opacity: 0;
       transform: translateY(30px);
@@ -844,11 +809,9 @@
       transform: translateY(0);
     }
 
-    /* Адаптив */
     @media (max-width: 480px) {
       .stats { gap: 10px; }
       .stat-card { padding: 20px 12px; }
-      .cta-btn { padding: 18px 32px; font-size: 15px; }
     }
   </style>
 </head>
@@ -863,7 +826,7 @@
   <header class="header">
     <div class="header-inner">
       <div class="logo">
-        <span class="logo-icon">🧬</span>
+        <span>🧬</span>
         <span class="logo-text">АРХИТЕКТУРА СОЗНАНИЯ</span>
       </div>
       <a href="https://t.me/+iKWn82tKCXM2YjMy" class="header-btn">Вступить в канал</a>
@@ -915,30 +878,33 @@
   <section class="section">
     <div class="container">
       <p class="section-label">Знакомо?</p>
-      <h2 class="section-title">Ловушки автопилота сознания</h2>
+      <h2 class="section-title">Что мешает жить на полную</h2>
+      <p class="section-subtitle">
+        Эти паттерны работают в фоновом режиме и забирают твою энергию, время и возможности.
+      </p>
 
       <div class="problem-card fade-in">
         <div class="problem-header">
           <div class="problem-icon">🔄</div>
           <h3>Повторяющиеся сценарии</h3>
         </div>
-        <p>Снова те же грабли. Снова токсичные отношения. Снова провал в карьере. Как будто кто-то нажимает кнопку replay в твоей жизни.</p>
+        <p>Снова те же грабли. Снова похожие ситуации. Снова «почему это опять со мной?» Это не невезение — это программа, которую можно переписать.</p>
       </div>
 
       <div class="problem-card fade-in">
         <div class="problem-header">
           <div class="problem-icon">😰</div>
-          <h3>Тревога пожирает энергию</h3>
+          <h3>Тревога забирает энергию</h3>
         </div>
-        <p>Просыпаешься уже уставшим. Мозг крутит негативные сценарии 24/7. Даже отдых не помогает восстановиться.</p>
+        <p>Мозг крутит негативные сценарии, не даёт расслабиться. Ты просыпаешься уже уставшим. Но тревогой можно научиться управлять.</p>
       </div>
 
       <div class="problem-card fade-in">
         <div class="problem-header">
           <div class="problem-icon">🎭</div>
-          <h3>Живёшь не своей жизнью</h3>
+          <h3>Ощущение «не своей» жизни</h3>
         </div>
-        <p>Работа — не та. Отношения — не те. Постоянное ощущение, что проживаешь чужой сценарий по навязанным установкам.</p>
+        <p>Работа, отношения, цели — как будто не твои. Ты выполняешь программу, которую загрузили извне. Пора написать свою.</p>
       </div>
 
       <div class="problem-card fade-in">
@@ -946,7 +912,7 @@
           <div class="problem-icon">⏸️</div>
           <h3>Прокрастинация и саботаж</h3>
         </div>
-        <p>Знаешь, что нужно делать. Но не делаешь. Откладываешь важное на потом. «Завтра начну» — каждый день.</p>
+        <p>Знаешь, что нужно делать. Но не делаешь. Это не лень — это защитный механизм мозга. И его можно обойти.</p>
       </div>
     </div>
   </section>
@@ -962,31 +928,31 @@
             <div class="ring ring-3"></div>
           </div>
           <span class="brain-emoji">🧠</span>
-          <p class="brain-title">Твой мозг прямо сейчас</p>
+          <p class="brain-title">Как работает твой мозг</p>
         </div>
 
         <div class="info-grid">
           <div class="info-card">
             <span class="info-number">95%</span>
             <div class="info-text">
-              <h4>Автопилот</h4>
-              <p>Подсознание управляет решениями</p>
+              <h4>Действий на автопилоте</h4>
+              <p>Подсознание управляет большинством решений</p>
             </div>
           </div>
 
           <div class="info-card">
             <span class="info-number">60К</span>
             <div class="info-text">
-              <h4>Мыслей в день</h4>
-              <p>80% — негативные и повторяющиеся</p>
+              <h4>Мыслей ежедневно</h4>
+              <p>80% из них — повторяющиеся</p>
             </div>
           </div>
 
           <div class="info-card">
-            <span class="info-number">0.5с</span>
+            <span class="info-number">21-66</span>
             <div class="info-text">
-              <h4>Решение принято</h4>
-              <p>Ещё до того, как ты «осознал»</p>
+              <h4>Дней на новую привычку</h4>
+              <p>Мозг можно перепрограммировать</p>
             </div>
           </div>
         </div>
@@ -994,12 +960,12 @@
 
       <div class="progress-grid fade-in">
         <p style="text-align: center; font-size: 14px; color: var(--text-muted); margin-bottom: 24px;">
-          Где застревает большинство людей:
+          С чем чаще всего работаем в канале:
         </p>
 
         <div class="progress-item">
           <div class="progress-header">
-            <span class="progress-label">🔄 Повторяющиеся сценарии</span>
+            <span class="progress-label">🔄 Выход из повторяющихся сценариев</span>
             <span class="progress-value">87%</span>
           </div>
           <div class="progress-bar">
@@ -1009,7 +975,7 @@
 
         <div class="progress-item">
           <div class="progress-header">
-            <span class="progress-label">😰 Хроническая тревожность</span>
+            <span class="progress-label">😌 Управление тревожностью</span>
             <span class="progress-value">73%</span>
           </div>
           <div class="progress-bar">
@@ -1019,7 +985,7 @@
 
         <div class="progress-item">
           <div class="progress-header">
-            <span class="progress-label">⏸️ Прокрастинация</span>
+            <span class="progress-label">🎯 Преодоление прокрастинации</span>
             <span class="progress-value">91%</span>
           </div>
           <div class="progress-bar">
@@ -1029,7 +995,7 @@
 
         <div class="progress-item">
           <div class="progress-header">
-            <span class="progress-label">🔋 Энергетическое истощение</span>
+            <span class="progress-label">⚡ Восстановление энергии</span>
             <span class="progress-value">68%</span>
           </div>
           <div class="progress-bar">
@@ -1038,8 +1004,8 @@
         </div>
       </div>
 
-      <p style="text-align: center; margin-top: 32px; font-size: 15px; color: var(--green); font-weight: 600;">
-        ✨ Хорошая новость: это можно перепрограммировать
+      <p style="text-align: center; margin-top: 32px; font-size: 16px; color: var(--green); font-weight: 700;">
+        ✨ Всё это можно изменить — с правильными инструментами
       </p>
     </div>
   </section>
@@ -1049,29 +1015,36 @@
     <div class="container">
       <p class="section-label">Что ты получишь</p>
       <h2 class="section-title">Инструменты трансформации</h2>
+      <p class="section-subtitle">
+        Это не мотивашки. Это техники, основанные на нейронауке, которые реально меняют нейронные связи.
+      </p>
 
       <div class="solution-card fade-in">
         <div class="solution-icon">🔬</div>
-        <h3>Поймёшь свои программы</h3>
-        <p>Увидишь, какие установки управляют твоей жизнью. Откуда они взялись. И как их переписать на новые.</p>
+        <h3>Увидишь свои программы</h3>
+        <p>Поймёшь, какие установки управляют твоей жизнью. Откуда они взялись. И как их переписать на новые.</p>
+        <p class="result">→ Результат: осознанность вместо автопилота</p>
       </div>
 
       <div class="solution-card fade-in">
         <div class="solution-icon">⚡</div>
         <h3>Научишься переключаться</h3>
         <p>Из тревоги — в спокойствие. Из апатии — в действие. Из раздражения — в ресурс. За минуты, не месяцы.</p>
+        <p class="result">→ Результат: контроль над состоянием</p>
       </div>
 
       <div class="solution-card fade-in">
         <div class="solution-icon">🎯</div>
         <h3>Начнёшь действовать</h3>
-        <p>Прокрастинация уйдёт. Саботаж прекратится. Появится энергия на то, что действительно важно.</p>
+        <p>Поймёшь, почему мозг саботирует важное. И как обойти этот механизм. Прокрастинация уйдёт.</p>
+        <p class="result">→ Результат: движение к целям</p>
       </div>
 
       <div class="solution-card fade-in">
         <div class="solution-icon">🔮</div>
         <h3>Вернёшь авторство жизни</h3>
-        <p>Перестанешь реагировать — начнёшь выбирать. Жизнь по своему сценарию, а не по чужим установкам.</p>
+        <p>Перестанешь реагировать — начнёшь выбирать. Жизнь по своему сценарию, а не по навязанным установкам.</p>
+        <p class="result">→ Результат: свобода быть собой</p>
       </div>
     </div>
   </section>
@@ -1087,7 +1060,7 @@
           <div class="timeline-dot">1</div>
           <div class="timeline-content">
             <h4>Осознание</h4>
-            <p>Замечаешь свои автоматические реакции и паттерны поведения</p>
+            <p>Начинаешь замечать свои автоматические реакции и паттерны</p>
           </div>
         </div>
 
@@ -1127,7 +1100,7 @@
       <div class="review-card fade-in">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">
-          «За месяц поняла, почему 10 лет выбирала одинаковых мужчин. Увидела паттерн, проработала — и сейчас в здоровых отношениях впервые в жизни.»
+          «За месяц поняла, почему 10 лет выбирала похожих мужчин. Увидела паттерн, проработала — <span class="review-highlight">и сейчас в здоровых отношениях впервые.</span>»
         </p>
         <div class="review-author">
           <div class="review-avatar">АМ</div>
@@ -1141,7 +1114,7 @@
       <div class="review-card fade-in">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">
-          «Тревога управляла мной 5 лет. Просыпался в панике, засыпал в панике. Теперь я управляю ей. Практики работают, если делать.»
+          «Тревога управляла мной 5 лет. Врачи, таблетки — ничего не помогало. <span class="review-highlight">Теперь я управляю тревогой, а не она мной.</span> Это понимание, как работает мозг.»
         </p>
         <div class="review-author">
           <div class="review-avatar">ДК</div>
@@ -1155,7 +1128,7 @@
       <div class="review-card fade-in">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">
-          «Наконец запустила проект, который откладывала 2 года. Оказалось, блок был в голове, а не в обстоятельствах. Спасибо за инструменты!»
+          «2 года откладывала запуск проекта. Страх, сомнения, «не время». <span class="review-highlight">Через месяц после канала — проект запущен, первые клиенты есть.</span>»
         </p>
         <div class="review-author">
           <div class="review-avatar">ЕВ</div>
@@ -1168,12 +1141,26 @@
     </div>
   </section>
 
+  <!-- Мотивация -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="motivation-block fade-in">
+        <div class="motivation-icon">🚀</div>
+        <h3 class="motivation-title">Представь себя через год</h3>
+        <p class="motivation-text">
+          Ты понимаешь свои реакции. Управляешь состоянием. Не повторяешь старые ошибки. Двигаешься к целям. Чувствуешь себя автором своей жизни.<br><br>
+          <strong>Это не фантазия — это результат, которого достигают подписчики канала.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Финальный CTA -->
   <section class="final-cta">
     <div class="container">
       <div class="cta-box fade-in">
         <span class="cta-emoji">🧬</span>
-        <h2>Готов перепрограммировать свой мозг?</h2>
+        <h2>Готов перепрограммировать мозг?</h2>
         <p>Присоединяйся к 7 124+ людям, которые уже меняют архитектуру своего сознания</p>
 
         <div class="cta-features">
@@ -1195,11 +1182,11 @@
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.17.17 0 00-.07-.2c-.08-.06-.2-.04-.28-.02-.12.02-1.96 1.25-5.54 3.66-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.75 3.98-1.73 6.64-2.87 7.97-3.43 3.8-1.57 4.59-1.85 5.1-1.85.11 0 .37.03.53.17.14.12.18.28.2.45 0 .06.01.24 0 .38z"/>
           </svg>
-          Вступить в канал →
+          Присоединиться бесплатно →
         </a>
 
         <p class="subscribers">
-          Уже <strong>7 124+</strong> человека внутри
+          <strong>7 124+</strong> человек уже внутри
         </p>
       </div>
     </div>
@@ -1216,23 +1203,19 @@
   </footer>
 
   <script>
-    // Анимации появления при скролле
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // Параллакс для орбов
+    // Параллакс
     document.addEventListener('mousemove', (e) => {
       const orbs = document.querySelectorAll('.orb');
       const x = e.clientX / window.innerWidth;
       const y = e.clientY / window.innerHeight;
-      
       orbs.forEach((orb, i) => {
         const speed = (i + 1) * 20;
         orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
