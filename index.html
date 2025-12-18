@@ -3,63 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Архитектура Сознания | Telegram</title>
+  <title>Архитектура Сознания | Перепрограммируй свой мозг</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: #111118;
+      --purple: #a855f7;
+      --purple-dark: #7c3aed;
+      --cyan: #06b6d4;
+      --cyan-light: #22d3ee;
+      --pink: #ec4899;
+      --green: #10b981;
+      --text: #ffffff;
+      --text-muted: #9ca3af;
+      --gradient: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 50%, var(--pink) 100%);
+      --gradient-btn: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+      --glow-purple: 0 0 60px rgba(168, 85, 247, 0.4);
+      --glow-cyan: 0 0 60px rgba(6, 182, 212, 0.3);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: #0a0a0f;
-      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    .bg-glow {
+    /* Анимированный фон */
+    .bg-animation {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: 
-        radial-gradient(ellipse at 20% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-        #0a0a0f;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: var(--purple);
+      top: -200px;
+      right: -200px;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: var(--cyan);
+      bottom: -150px;
+      left: -150px;
+      animation-delay: -7s;
+    }
+
+    .orb-3 {
+      width: 400px;
+      height: 400px;
+      background: var(--pink);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -14s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(50px, -50px) scale(1.1); }
+      50% { transform: translate(-30px, 30px) scale(0.9); }
+      75% { transform: translate(-50px, -30px) scale(1.05); }
+    }
+
+    /* Сетка */
+    .grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image: 
+        linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
     }
 
     .container {
       width: 100%;
-      max-width: 440px;
+      max-width: 600px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 24px;
     }
 
+    /* Хедер */
     .header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 100;
-      padding: 16px 20px;
-      background: rgba(10, 10, 15, 0.9);
+      padding: 16px 24px;
+      background: rgba(10, 10, 15, 0.8);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .header-inner {
-      max-width: 440px;
+      max-width: 600px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -67,278 +137,397 @@
     }
 
     .logo {
-      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
       font-weight: 700;
-      color: #fff;
     }
 
-    .logo span {
-      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    .logo-icon {
+      font-size: 18px;
+    }
+
+    .logo-text {
+      background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
     .header-btn {
-      padding: 10px 18px;
-      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+      padding: 10px 20px;
+      background: var(--gradient-btn);
       border: none;
-      border-radius: 30px;
+      border-radius: 50px;
       color: #fff;
       font-size: 12px;
       font-weight: 700;
       text-decoration: none;
+      transition: all 0.3s;
     }
 
+    .header-btn:hover {
+      box-shadow: var(--glow-purple);
+      transform: translateY(-2px);
+    }
+
+    /* HERO */
     .hero {
-      padding: 100px 0 50px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 0 80px;
       text-align: center;
+      position: relative;
     }
 
-    .badge {
+    .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px;
-      background: rgba(139, 92, 246, 0.15);
-      border: 1px solid rgba(139, 92, 246, 0.3);
-      border-radius: 30px;
+      padding: 10px 20px;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 50px;
       font-size: 12px;
       font-weight: 600;
-      color: #a78bfa;
-      margin-bottom: 24px;
+      color: var(--purple);
+      margin-bottom: 32px;
+      animation: fadeInUp 0.8s ease;
     }
 
     .badge-dot {
-      width: 6px;
-      height: 6px;
-      background: #10b981;
+      width: 8px;
+      height: 8px;
+      background: var(--green);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+      50% { opacity: 0.8; box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
     }
 
     .hero h1 {
-      font-size: 28px;
+      font-size: clamp(32px, 8vw, 56px);
       font-weight: 800;
-      line-height: 1.25;
-      margin-bottom: 20px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.8s ease 0.1s both;
     }
 
     .hero h1 .gradient {
-      background: linear-gradient(135deg, #8b5cf6, #06b6d4, #10b981);
+      background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      display: block;
     }
 
     .hero-text {
-      font-size: 15px;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 28px;
-      line-height: 1.7;
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+      animation: fadeInUp 0.8s ease 0.2s both;
     }
 
     .cta-btn {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
-      width: 100%;
-      padding: 18px 32px;
-      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+      padding: 20px 48px;
+      background: var(--gradient-btn);
       border: none;
-      border-radius: 16px;
+      border-radius: 60px;
       color: #fff;
       font-size: 16px;
       font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: var(--glow-purple);
+      transition: all 0.4s;
+      animation: fadeInUp 0.8s ease 0.3s both;
+      position: relative;
+      overflow: hidden;
     }
 
-    .cta-btn:active {
-      transform: scale(0.98);
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+
+    .cta-btn:hover::before {
+      left: 100%;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 20px 60px rgba(168, 85, 247, 0.5);
     }
 
     .cta-btn svg {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
     }
 
+    /* Статистика */
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 32px;
+      gap: 16px;
+      margin-top: 60px;
+      animation: fadeInUp 0.8s ease 0.4s both;
     }
 
     .stat-card {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 14px;
-      padding: 16px 8px;
+      border-radius: 20px;
+      padding: 24px 16px;
       text-align: center;
+      transition: all 0.3s;
+    }
+
+    .stat-card:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(168, 85, 247, 0.3);
+      transform: translateY(-5px);
     }
 
     .stat-value {
-      font-size: 22px;
+      font-size: clamp(28px, 6vw, 36px);
       font-weight: 800;
-      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+      background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      line-height: 1;
     }
 
     .stat-label {
-      font-size: 10px;
-      color: rgba(255,255,255,0.5);
-      margin-top: 4px;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
     }
 
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Секции */
     .section {
-      padding: 50px 0;
+      padding: 80px 0;
     }
 
     .section-label {
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      color: #8b5cf6;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .section-title {
-      font-size: 22px;
+      font-size: clamp(24px, 5vw, 32px);
       font-weight: 800;
       text-align: center;
-      margin-bottom: 28px;
-      line-height: 1.3;
+      margin-bottom: 48px;
+      line-height: 1.2;
     }
 
+    /* Карточки проблем */
     .problem-card {
       background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.02));
       border: 1px solid rgba(239, 68, 68, 0.2);
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 14px;
+      border-radius: 24px;
+      padding: 28px 24px;
+      margin-bottom: 16px;
+      transition: all 0.3s;
     }
 
-    .problem-card .icon {
-      font-size: 28px;
-      margin-bottom: 10px;
+    .problem-card:hover {
+      transform: translateX(8px);
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+
+    .problem-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .problem-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(239, 68, 68, 0.15);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
     }
 
     .problem-card h3 {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
-      margin-bottom: 6px;
       color: #fca5a5;
     }
 
     .problem-card p {
-      font-size: 13px;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.6;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
     }
 
-    .brain-stats {
-      background: linear-gradient(180deg, rgba(139, 92, 246, 0.1), transparent);
-      border-radius: 20px;
-      padding: 28px 20px;
-      margin-bottom: 20px;
+    /* Инфографика мозга */
+    .brain-section {
+      background: linear-gradient(180deg, rgba(168, 85, 247, 0.05), transparent);
+      border-radius: 32px;
+      padding: 40px 24px;
+      margin: 48px 0;
+      border: 1px solid rgba(168, 85, 247, 0.1);
     }
 
     .brain-visual {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
+      position: relative;
     }
 
     .brain-emoji {
-      font-size: 64px;
-      display: block;
-      margin-bottom: 12px;
-      animation: float 3s ease-in-out infinite;
+      font-size: 80px;
+      display: inline-block;
+      animation: brainPulse 3s infinite ease-in-out;
+      filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.5));
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+    @keyframes brainPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .brain-rings {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 150px;
+      height: 150px;
+    }
+
+    .ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 2px solid rgba(168, 85, 247, 0.2);
+      border-radius: 50%;
+      animation: ringPulse 3s infinite ease-out;
+    }
+
+    .ring-1 { width: 100px; height: 100px; animation-delay: 0s; }
+    .ring-2 { width: 130px; height: 130px; animation-delay: 0.5s; }
+    .ring-3 { width: 160px; height: 160px; animation-delay: 1s; }
+
+    @keyframes ringPulse {
+      0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
     }
 
     .brain-title {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 700;
-      color: #a78bfa;
+      color: var(--purple);
+      margin-top: 16px;
     }
 
-    .info-row {
+    .info-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .info-card {
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 16px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .info-row:last-child {
-      border-bottom: none;
+      gap: 20px;
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.05);
     }
 
     .info-number {
-      min-width: 60px;
-      font-size: 24px;
+      font-size: 32px;
       font-weight: 800;
-      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+      background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      min-width: 70px;
     }
 
     .info-text h4 {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
 
     .info-text p {
-      font-size: 11px;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.5;
+      font-size: 12px;
+      color: var(--text-muted);
     }
 
-    .progress-section {
-      margin-bottom: 24px;
+    /* Прогресс бары */
+    .progress-grid {
+      margin-top: 32px;
     }
 
     .progress-item {
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     .progress-header {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .progress-label {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
     }
 
     .progress-value {
-      font-size: 12px;
-      font-weight: 700;
-      color: #8b5cf6;
+      font-size: 13px;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .progress-bar {
-      height: 6px;
+      height: 10px;
       background: rgba(255,255,255,0.1);
       border-radius: 10px;
       overflow: hidden;
@@ -346,223 +535,308 @@
 
     .progress-fill {
       height: 100%;
+      background: var(--gradient);
       border-radius: 10px;
-      background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+      position: relative;
+      overflow: hidden;
     }
 
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Карточки решений */
     .solution-card {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.02));
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.05));
       border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 14px;
+      border-radius: 24px;
+      padding: 28px 24px;
+      margin-bottom: 16px;
+      transition: all 0.3s;
     }
 
-    .solution-card .icon {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, #10b981, #06b6d4);
-      border-radius: 14px;
+    .solution-card:hover {
+      transform: translateX(8px);
+      border-color: rgba(16, 185, 129, 0.4);
+      box-shadow: 0 10px 40px rgba(16, 185, 129, 0.1);
+    }
+
+    .solution-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-      margin-bottom: 14px;
+      font-size: 28px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3);
     }
 
     .solution-card h3 {
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       color: #6ee7b7;
     }
 
     .solution-card p {
-      font-size: 13px;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.6;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
     }
 
-    .journey {
+    /* Таймлайн */
+    .timeline {
       position: relative;
-      padding-left: 28px;
+      padding-left: 40px;
     }
 
-    .journey::before {
+    .timeline::before {
       content: '';
       position: absolute;
-      left: 9px;
+      left: 15px;
       top: 0;
       bottom: 0;
-      width: 2px;
-      background: linear-gradient(180deg, #8b5cf6, #06b6d4, #10b981);
+      width: 3px;
+      background: var(--gradient);
+      border-radius: 10px;
     }
 
-    .journey-step {
+    .timeline-step {
       position: relative;
-      padding-bottom: 28px;
+      padding-bottom: 32px;
     }
 
-    .journey-step:last-child {
-      padding-bottom: 0;
-    }
+    .timeline-step:last-child { padding-bottom: 0; }
 
-    .journey-dot {
+    .timeline-dot {
       position: absolute;
-      left: -28px;
+      left: -40px;
       top: 0;
-      width: 20px;
-      height: 20px;
-      background: #0a0a0f;
-      border: 3px solid #8b5cf6;
+      width: 32px;
+      height: 32px;
+      background: var(--bg);
+      border: 3px solid var(--purple);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 9px;
-      font-weight: 800;
-    }
-
-    .journey-step:nth-child(2) .journey-dot { border-color: #06b6d4; }
-    .journey-step:nth-child(3) .journey-dot { border-color: #10b981; }
-    .journey-step:nth-child(4) .journey-dot { border-color: #f59e0b; }
-
-    .journey-content h4 {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .journey-content p {
       font-size: 12px;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.5;
+      font-weight: 800;
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
     }
 
+    .timeline-step:nth-child(2) .timeline-dot { border-color: var(--cyan); box-shadow: 0 0 20px rgba(6, 182, 212, 0.4); }
+    .timeline-step:nth-child(3) .timeline-dot { border-color: var(--green); box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
+    .timeline-step:nth-child(4) .timeline-dot { border-color: var(--pink); box-shadow: 0 0 20px rgba(236, 72, 153, 0.4); }
+
+    .timeline-content h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .timeline-content p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Отзывы */
     .review-card {
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.02);
       border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 14px;
+      border-radius: 24px;
+      padding: 28px 24px;
+      margin-bottom: 16px;
+      transition: all 0.3s;
+    }
+
+    .review-card:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(168, 85, 247, 0.2);
     }
 
     .review-stars {
       color: #fbbf24;
-      font-size: 14px;
-      margin-bottom: 10px;
+      font-size: 18px;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
     }
 
     .review-text {
-      font-size: 13px;
-      color: rgba(255,255,255,0.8);
-      line-height: 1.7;
-      margin-bottom: 14px;
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 20px;
       font-style: italic;
+      color: rgba(255,255,255,0.9);
     }
 
     .review-author {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
     }
 
     .review-avatar {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+      width: 48px;
+      height: 48px;
+      background: var(--gradient);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 12px;
+      font-size: 16px;
     }
 
     .review-name {
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 15px;
+      font-weight: 700;
     }
 
     .review-role {
-      font-size: 11px;
-      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+      color: var(--text-muted);
     }
 
+    /* Финальный CTA */
     .final-cta {
-      padding: 50px 0 40px;
-      text-align: center;
+      padding: 80px 0;
     }
 
     .cta-box {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.1));
-      border: 1px solid rgba(139, 92, 246, 0.3);
-      border-radius: 22px;
-      padding: 32px 20px;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.1));
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 32px;
+      padding: 48px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.1) 0%, transparent 60%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .cta-box > * { position: relative; z-index: 1; }
+
+    .cta-emoji {
+      font-size: 64px;
+      margin-bottom: 24px;
+      display: block;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
     .cta-box h2 {
-      font-size: 20px;
+      font-size: clamp(22px, 5vw, 28px);
       font-weight: 800;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       line-height: 1.3;
     }
 
     .cta-box > p {
-      font-size: 13px;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 20px;
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
     }
 
     .cta-features {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 14px;
+      margin-bottom: 32px;
     }
 
     .cta-feature {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      font-size: 12px;
-      color: #a78bfa;
-    }
-
-    .cta-feature svg {
-      width: 16px;
-      height: 16px;
-      fill: #10b981;
-    }
-
-    .subscribers-count {
-      margin-top: 16px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.6);
-    }
-
-    .subscribers-count strong {
-      color: #8b5cf6;
+      gap: 10px;
       font-size: 14px;
     }
 
+    .cta-feature svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--green);
+    }
+
+    .subscribers {
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .subscribers strong {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 18px;
+    }
+
+    /* Футер */
     .footer {
-      padding: 28px 20px;
+      padding: 40px 24px;
       text-align: center;
       border-top: 1px solid rgba(255,255,255,0.05);
     }
 
-    .footer p {
-      font-size: 10px;
-      color: rgba(255,255,255,0.4);
-      line-height: 1.6;
+    .footer-logo {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
     }
 
+    .footer-logo span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer p {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Анимации появления */
     .fade-in {
       opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .fade-in.visible {
@@ -570,118 +844,137 @@
       transform: translateY(0);
     }
 
-    .good-news {
-      font-size: 13px;
-      color: #10b981;
-      text-align: center;
-      font-weight: 600;
-      margin-top: 20px;
+    /* Адаптив */
+    @media (max-width: 480px) {
+      .stats { gap: 10px; }
+      .stat-card { padding: 20px 12px; }
+      .cta-btn { padding: 18px 32px; font-size: 15px; }
     }
   </style>
 </head>
 <body>
-  <div class="bg-glow"></div>
+  <div class="bg-animation">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="grid-bg"></div>
 
   <header class="header">
     <div class="header-inner">
-      <div class="logo">🧬 <span>АРХИТЕКТУРА СОЗНАНИЯ</span></div>
-      <a href="https://t.me/+iKWn82tKCXM2YjMy" class="header-btn" target="_blank">Вступить</a>
+      <div class="logo">
+        <span class="logo-icon">🧬</span>
+        <span class="logo-text">АРХИТЕКТУРА СОЗНАНИЯ</span>
+      </div>
+      <a href="https://t.me/+iKWn82tKCXM2YjMy" class="header-btn">Вступить в канал</a>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <div class="badge">
-          <span class="badge-dot"></span>
-          7 124+ уже с нами
-        </div>
-        
-        <h1>
-          Выйди из<br>
-          <span class="gradient">автопилота</span><br>
-          своего мозга
-        </h1>
-        
-        <p class="hero-text">
-          95% решений принимает подсознание. Научись управлять этим — и жизнь изменится.
-        </p>
-        
-        <a href="https://t.me/+iKWn82tKCXM2YjMy" class="cta-btn" target="_blank">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.17.17 0 00-.07-.2c-.08-.06-.2-.04-.28-.02-.12.02-1.96 1.25-5.54 3.66-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.75 3.98-1.73 6.64-2.87 7.97-3.43 3.8-1.57 4.59-1.85 5.1-1.85.11 0 .37.03.53.17.14.12.18.28.2.45 0 .06.01.24 0 .38z"/>
-          </svg>
-          Вступить бесплатно
-        </a>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        7 124+ уже перепрограммировали мозг
+      </div>
 
-        <div class="stats">
-          <div class="stat-card">
-            <div class="stat-value">500+</div>
-            <div class="stat-label">Практик</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">98%</div>
-            <div class="stat-label">Довольны</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">24/7</div>
-            <div class="stat-label">Доступ</div>
-          </div>
+      <h1>
+        Перепрограммируй
+        <span class="gradient">архитектуру</span>
+        своего мозга
+      </h1>
+
+      <p class="hero-text">
+        Научись управлять своим состоянием, выйди из автоматических реакций и верни себя в точку силы. Практики и инструменты от нейропсихолога.
+      </p>
+
+      <a href="https://t.me/+iKWn82tKCXM2YjMy" class="cta-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.17.17 0 00-.07-.2c-.08-.06-.2-.04-.28-.02-.12.02-1.96 1.25-5.54 3.66-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.75 3.98-1.73 6.64-2.87 7.97-3.43 3.8-1.57 4.59-1.85 5.1-1.85.11 0 .37.03.53.17.14.12.18.28.2.45 0 .06.01.24 0 .38z"/>
+        </svg>
+        Присоединиться бесплатно
+      </a>
+
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-value">7 124+</div>
+          <div class="stat-label">Подписчиков</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">500+</div>
+          <div class="stat-label">Практик</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">98%</div>
+          <div class="stat-label">Довольны</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section">
-      <div class="container">
-        <p class="section-label">Знакомо?</p>
-        <h2 class="section-title">Почему жизнь буксует</h2>
+  <!-- Проблемы -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Знакомо?</p>
+      <h2 class="section-title">Ловушки автопилота сознания</h2>
 
-        <div class="problem-card fade-in">
-          <div class="icon">🔄</div>
-          <h3>Одни и те же грабли</h3>
-          <p>Снова токсичные отношения. Снова провал. Как будто кто-то нажимает replay.</p>
+      <div class="problem-card fade-in">
+        <div class="problem-header">
+          <div class="problem-icon">🔄</div>
+          <h3>Повторяющиеся сценарии</h3>
         </div>
-
-        <div class="problem-card fade-in">
-          <div class="icon">😰</div>
-          <h3>Тревога съедает энергию</h3>
-          <p>Просыпаешься уже уставшим. Мозг крутит негатив 24/7.</p>
-        </div>
-
-        <div class="problem-card fade-in">
-          <div class="icon">🎭</div>
-          <h3>Это не моя жизнь</h3>
-          <p>Работа не та. Отношения не те. Живёшь по чужому сценарию.</p>
-        </div>
-
-        <div class="problem-card fade-in">
-          <div class="icon">⏸️</div>
-          <h3>Застрял и не двигаюсь</h3>
-          <p>Знаешь, что делать. Но не делаешь. Прокрастинация, саботаж.</p>
-        </div>
+        <p>Снова те же грабли. Снова токсичные отношения. Снова провал в карьере. Как будто кто-то нажимает кнопку replay в твоей жизни.</p>
       </div>
-    </section>
 
-    <section class="section">
-      <div class="container">
-        <p class="section-label">Нейронаука</p>
-        <h2 class="section-title">Почему так происходит</h2>
+      <div class="problem-card fade-in">
+        <div class="problem-header">
+          <div class="problem-icon">😰</div>
+          <h3>Тревога пожирает энергию</h3>
+        </div>
+        <p>Просыпаешься уже уставшим. Мозг крутит негативные сценарии 24/7. Даже отдых не помогает восстановиться.</p>
+      </div>
 
-        <div class="brain-stats fade-in">
-          <div class="brain-visual">
-            <span class="brain-emoji">🧠</span>
-            <p class="brain-title">Твой мозг прямо сейчас</p>
+      <div class="problem-card fade-in">
+        <div class="problem-header">
+          <div class="problem-icon">🎭</div>
+          <h3>Живёшь не своей жизнью</h3>
+        </div>
+        <p>Работа — не та. Отношения — не те. Постоянное ощущение, что проживаешь чужой сценарий по навязанным установкам.</p>
+      </div>
+
+      <div class="problem-card fade-in">
+        <div class="problem-header">
+          <div class="problem-icon">⏸️</div>
+          <h3>Прокрастинация и саботаж</h3>
+        </div>
+        <p>Знаешь, что нужно делать. Но не делаешь. Откладываешь важное на потом. «Завтра начну» — каждый день.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Инфографика -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="brain-section fade-in">
+        <div class="brain-visual">
+          <div class="brain-rings">
+            <div class="ring ring-1"></div>
+            <div class="ring ring-2"></div>
+            <div class="ring ring-3"></div>
           </div>
+          <span class="brain-emoji">🧠</span>
+          <p class="brain-title">Твой мозг прямо сейчас</p>
+        </div>
 
-          <div class="info-row">
+        <div class="info-grid">
+          <div class="info-card">
             <span class="info-number">95%</span>
             <div class="info-text">
-              <h4>На автопилоте</h4>
-              <p>Подсознание управляет почти всеми решениями</p>
+              <h4>Автопилот</h4>
+              <p>Подсознание управляет решениями</p>
             </div>
           </div>
 
-          <div class="info-row">
+          <div class="info-card">
             <span class="info-number">60К</span>
             <div class="info-text">
               <h4>Мыслей в день</h4>
@@ -689,230 +982,262 @@
             </div>
           </div>
 
-          <div class="info-row">
+          <div class="info-card">
             <span class="info-number">0.5с</span>
             <div class="info-text">
               <h4>Решение принято</h4>
-              <p>Мозг решает за полсекунды ДО тебя</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="progress-section fade-in">
-          <p style="font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 16px; text-align: center;">
-            Где застревает большинство:
-          </p>
-          
-          <div class="progress-item">
-            <div class="progress-header">
-              <span class="progress-label">Повторяющиеся сценарии</span>
-              <span class="progress-value">87%</span>
-            </div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 87%"></div>
-            </div>
-          </div>
-
-          <div class="progress-item">
-            <div class="progress-header">
-              <span class="progress-label">Хроническая тревожность</span>
-              <span class="progress-value">73%</span>
-            </div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 73%"></div>
-            </div>
-          </div>
-
-          <div class="progress-item">
-            <div class="progress-header">
-              <span class="progress-label">Прокрастинация</span>
-              <span class="progress-value">91%</span>
-            </div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 91%"></div>
-            </div>
-          </div>
-        </div>
-
-        <p class="good-news">✨ Хорошая новость: это можно изменить</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <p class="section-label">В канале</p>
-        <h2 class="section-title">Что изменится</h2>
-
-        <div class="solution-card fade-in">
-          <div class="icon">🔬</div>
-          <h3>Поймёшь свои программы</h3>
-          <p>Увидишь установки, которые управляют жизнью. И как их переписать.</p>
-        </div>
-
-        <div class="solution-card fade-in">
-          <div class="icon">⚡</div>
-          <h3>Научишься переключаться</h3>
-          <p>Из тревоги — в спокойствие. Из апатии — в действие. За минуты.</p>
-        </div>
-
-        <div class="solution-card fade-in">
-          <div class="icon">🎯</div>
-          <h3>Начнёшь действовать</h3>
-          <p>Прокрастинация уйдёт. Появится энергия. Цели начнут достигаться.</p>
-        </div>
-
-        <div class="solution-card fade-in">
-          <div class="icon">🔮</div>
-          <h3>Вернёшь контроль</h3>
-          <p>Перестанешь реагировать — начнёшь выбирать. Жизнь по своим правилам.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <p class="section-label">Как это работает</p>
-        <h2 class="section-title">Твой путь</h2>
-
-        <div class="journey fade-in">
-          <div class="journey-step">
-            <div class="journey-dot">1</div>
-            <div class="journey-content">
-              <h4>Осознание</h4>
-              <p>Замечаешь автоматические реакции</p>
-            </div>
-          </div>
-
-          <div class="journey-step">
-            <div class="journey-dot">2</div>
-            <div class="journey-content">
-              <h4>Понимание</h4>
-              <p>Узнаёшь, как это работает</p>
-            </div>
-          </div>
-
-          <div class="journey-step">
-            <div class="journey-dot">3</div>
-            <div class="journey-content">
-              <h4>Практика</h4>
-              <p>Создаёшь новые нейронные связи</p>
-            </div>
-          </div>
-
-          <div class="journey-step">
-            <div class="journey-dot">4</div>
-            <div class="journey-content">
-              <h4>Трансформация</h4>
-              <p>Новое поведение — автоматическое</p>
+              <p>Ещё до того, как ты «осознал»</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <section class="section">
-      <div class="container">
-        <p class="section-label">Отзывы</p>
-        <h2 class="section-title">Уже работает</h2>
+      <div class="progress-grid fade-in">
+        <p style="text-align: center; font-size: 14px; color: var(--text-muted); margin-bottom: 24px;">
+          Где застревает большинство людей:
+        </p>
 
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">
-            «За месяц поняла, почему 10 лет выбирала одинаковых мужчин. Сейчас в здоровых отношениях.»
-          </p>
-          <div class="review-author">
-            <div class="review-avatar">АМ</div>
-            <div>
-              <div class="review-name">Анна М.</div>
-              <div class="review-role">дизайнер, 29 лет</div>
-            </div>
+        <div class="progress-item">
+          <div class="progress-header">
+            <span class="progress-label">🔄 Повторяющиеся сценарии</span>
+            <span class="progress-value">87%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 87%"></div>
           </div>
         </div>
 
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">
-            «Тревога управляла мной 5 лет. Теперь я управляю ей. Практики работают.»
-          </p>
-          <div class="review-author">
-            <div class="review-avatar">ДК</div>
-            <div>
-              <div class="review-name">Дмитрий К.</div>
-              <div class="review-role">предприниматель, 34 года</div>
-            </div>
+        <div class="progress-item">
+          <div class="progress-header">
+            <span class="progress-label">😰 Хроническая тревожность</span>
+            <span class="progress-value">73%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 73%"></div>
           </div>
         </div>
 
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">
-            «Запустила проект, который откладывала 2 года. Блок был в голове.»
-          </p>
-          <div class="review-author">
-            <div class="review-avatar">ЕВ</div>
-            <div>
-              <div class="review-name">Елена В.</div>
-              <div class="review-role">маркетолог, 31 год</div>
-            </div>
+        <div class="progress-item">
+          <div class="progress-header">
+            <span class="progress-label">⏸️ Прокрастинация</span>
+            <span class="progress-value">91%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 91%"></div>
+          </div>
+        </div>
+
+        <div class="progress-item">
+          <div class="progress-header">
+            <span class="progress-label">🔋 Энергетическое истощение</span>
+            <span class="progress-value">68%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 68%"></div>
           </div>
         </div>
       </div>
-    </section>
 
-    <section class="final-cta">
-      <div class="container">
-        <div class="cta-box fade-in">
-          <h2>Готов выйти из автопилота?</h2>
-          <p>7 124+ людей уже меняют жизнь осознанно</p>
-          
-          <div class="cta-features">
-            <div class="cta-feature">
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Бесплатно навсегда
-            </div>
-            <div class="cta-feature">
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Практики каждый день
-            </div>
-            <div class="cta-feature">
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Научный подход
-            </div>
+      <p style="text-align: center; margin-top: 32px; font-size: 15px; color: var(--green); font-weight: 600;">
+        ✨ Хорошая новость: это можно перепрограммировать
+      </p>
+    </div>
+  </section>
+
+  <!-- Решения -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Что ты получишь</p>
+      <h2 class="section-title">Инструменты трансформации</h2>
+
+      <div class="solution-card fade-in">
+        <div class="solution-icon">🔬</div>
+        <h3>Поймёшь свои программы</h3>
+        <p>Увидишь, какие установки управляют твоей жизнью. Откуда они взялись. И как их переписать на новые.</p>
+      </div>
+
+      <div class="solution-card fade-in">
+        <div class="solution-icon">⚡</div>
+        <h3>Научишься переключаться</h3>
+        <p>Из тревоги — в спокойствие. Из апатии — в действие. Из раздражения — в ресурс. За минуты, не месяцы.</p>
+      </div>
+
+      <div class="solution-card fade-in">
+        <div class="solution-icon">🎯</div>
+        <h3>Начнёшь действовать</h3>
+        <p>Прокрастинация уйдёт. Саботаж прекратится. Появится энергия на то, что действительно важно.</p>
+      </div>
+
+      <div class="solution-card fade-in">
+        <div class="solution-icon">🔮</div>
+        <h3>Вернёшь авторство жизни</h3>
+        <p>Перестанешь реагировать — начнёшь выбирать. Жизнь по своему сценарию, а не по чужим установкам.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Путь -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Как это работает</p>
+      <h2 class="section-title">Путь трансформации</h2>
+
+      <div class="timeline fade-in">
+        <div class="timeline-step">
+          <div class="timeline-dot">1</div>
+          <div class="timeline-content">
+            <h4>Осознание</h4>
+            <p>Замечаешь свои автоматические реакции и паттерны поведения</p>
           </div>
+        </div>
 
-          <a href="https://t.me/+iKWn82tKCXM2YjMy" class="cta-btn" target="_blank">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.17.17 0 00-.07-.2c-.08-.06-.2-.04-.28-.02-.12.02-1.96 1.25-5.54 3.66-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.75 3.98-1.73 6.64-2.87 7.97-3.43 3.8-1.57 4.59-1.85 5.1-1.85.11 0 .37.03.53.17.14.12.18.28.2.45 0 .06.01.24 0 .38z"/>
-            </svg>
-            Вступить в канал →
-          </a>
+        <div class="timeline-step">
+          <div class="timeline-dot">2</div>
+          <div class="timeline-content">
+            <h4>Понимание</h4>
+            <p>Узнаёшь, как работает мозг и почему ты реагируешь именно так</p>
+          </div>
+        </div>
 
-          <p class="subscribers-count">
-            Уже <strong>7 124+</strong> внутри
-          </p>
+        <div class="timeline-step">
+          <div class="timeline-dot">3</div>
+          <div class="timeline-content">
+            <h4>Практика</h4>
+            <p>Применяешь техники и создаёшь новые нейронные связи</p>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-dot">4</div>
+          <div class="timeline-content">
+            <h4>Интеграция</h4>
+            <p>Новые реакции становятся автоматическими. Ты изменился.</p>
+          </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <!-- Отзывы -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Результаты</p>
+      <h2 class="section-title">Что говорят подписчики</h2>
+
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">
+          «За месяц поняла, почему 10 лет выбирала одинаковых мужчин. Увидела паттерн, проработала — и сейчас в здоровых отношениях впервые в жизни.»
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">АМ</div>
+          <div>
+            <div class="review-name">Анна М.</div>
+            <div class="review-role">дизайнер, 29 лет</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">
+          «Тревога управляла мной 5 лет. Просыпался в панике, засыпал в панике. Теперь я управляю ей. Практики работают, если делать.»
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">ДК</div>
+          <div>
+            <div class="review-name">Дмитрий К.</div>
+            <div class="review-role">предприниматель, 34 года</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">
+          «Наконец запустила проект, который откладывала 2 года. Оказалось, блок был в голове, а не в обстоятельствах. Спасибо за инструменты!»
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">ЕВ</div>
+          <div>
+            <div class="review-name">Елена В.</div>
+            <div class="review-role">маркетолог, 31 год</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Финальный CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <div class="cta-box fade-in">
+        <span class="cta-emoji">🧬</span>
+        <h2>Готов перепрограммировать свой мозг?</h2>
+        <p>Присоединяйся к 7 124+ людям, которые уже меняют архитектуру своего сознания</p>
+
+        <div class="cta-features">
+          <div class="cta-feature">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Бесплатный доступ навсегда
+          </div>
+          <div class="cta-feature">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Практики и техники каждый день
+          </div>
+          <div class="cta-feature">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Научный подход + реальные результаты
+          </div>
+        </div>
+
+        <a href="https://t.me/+iKWn82tKCXM2YjMy" class="cta-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.17.17 0 00-.07-.2c-.08-.06-.2-.04-.28-.02-.12.02-1.96 1.25-5.54 3.66-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.75 3.98-1.73 6.64-2.87 7.97-3.43 3.8-1.57 4.59-1.85 5.1-1.85.11 0 .37.03.53.17.14.12.18.28.2.45 0 .06.01.24 0 .38z"/>
+          </svg>
+          Вступить в канал →
+        </a>
+
+        <p class="subscribers">
+          Уже <strong>7 124+</strong> человека внутри
+        </p>
+      </div>
+    </div>
+  </section>
 
   <footer class="footer">
+    <div class="footer-logo">🧬 <span>Архитектура Сознания</span></div>
     <p>
-      🧬 Архитектура Сознания<br><br>
-      ИП Ростовцева Дарья Валерьевна<br>
-      ИНН: 241103415641
+      Как мозг формирует твою реальность<br>
+      Как состояние запускает новые сценарии<br>
+      Как выйти из автоматизма и вернуть себя в точку силы<br><br>
+      ИП Ростовцева Дарья Валерьевна • ИНН: 241103415641
     </p>
   </footer>
 
   <script>
+    // Анимации появления при скролле
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Параллакс для орбов
+    document.addEventListener('mousemove', (e) => {
+      const orbs = document.querySelectorAll('.orb');
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      
+      orbs.forEach((orb, i) => {
+        const speed = (i + 1) * 20;
+        orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+      });
+    });
   </script>
 </body>
 </html>
